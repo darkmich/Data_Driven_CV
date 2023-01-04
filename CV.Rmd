@@ -1,0 +1,191 @@
+---
+name: "Michael J."
+surname: "Dark"
+given-name-pattern: "M. J."
+family-name-pattern: "Dark"
+degrees: "D.V.M., Ph.D., Dip. ACVP"
+position: "Executive Director, Veterinary Diagnostic Laboratories \\tabularnewline Clinical Associate Professor"
+institution: "University of Florida College of Veterinary Medicine"
+address: "P.O. Box 100116 \\tabularnewline Gainesville, FL 32610-0116"
+phone: +1 352 294 4138
+email: "darkmich@ufl.edu"
+orcid: "0000-0002-6547-1298"
+date: "`r format(Sys.time(), '%B %Y')`"
+headcolor: "005500"
+fontsize: "12pt"
+csl: mjd-cv.csl # change this if you want to use other citation styles
+output: 
+  vitae::hyndman:
+    pandoc_args: ["--lua-filter=lua/strong.lua"]
+header-includes:
+  - \DeclareUnicodeCharacter{3B1}{\ensuremath{}}
+  - \DeclareUnicodeCharacter{202C}{\ensuremath{}}
+  - \newcommand{\mathsemicolon}{\&}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+library(tibble)
+source("CV_Data.R")
+#rmarkdown::pandoc_version()
+```
+
+# Education
+
+## Degrees
+
+```{r}
+edu %>% 
+  detailed_entries(Degree, Year, Where, Institution)
+```
+
+## Board Certification
+
+```{r}
+boards %>%    
+  
+  brief_entries(
+    Desc,
+    Year, 
+    Type
+  )
+```
+
+## Other Training
+
+``` {r}
+training %>%
+  brief_entries(What, Year, Who)
+```
+
+# Employment
+
+```{r}
+employment %>% 
+  detailed_entries(
+    Position,
+    Year, 
+    Where,
+    Institution, .protect=FALSE
+  )
+```
+
+# Professional Licensure
+
+```{r}
+licenses %>%
+  detailed_entries(Type, State, Year, LicenseNum)
+```  
+
+# Honors and Awards
+
+```{r}
+honors %>% 
+  brief_entries(
+    Type,
+    Year, 
+    Desc
+  )
+```
+
+# Publications
+
+```{r}
+source("generate_pubs.R")
+```
+
+## Journal Articles
+
+```{r results='markup'}
+pubs <- bibliography_entries("pubs.bib")
+pubs
+
+```
+
+## Book Chapters
+
+```{r}
+bibliography_entries("books.bib")
+```
+
+# Teaching Experience
+
+## University of Florida - Gainesville, FL
+``` {r}
+UFteaching %>%   detailed_entries(Class, Course, Year, Position, Info)
+```
+
+## Washington State Unversity - Pullman, WA
+``` {r}
+WSUteaching %>%   detailed_entries(Class, Course, Year, Position, Info)
+```
+
+# Graduate Students
+
+```{r}
+grad_students %>% detailed_entries(Student, Position, Year, Department, Info)
+```
+
+# Presentations and Invited Lectures
+
+## Presentations
+
+``` {r}
+presentations %>% detailed_entries(Title, When, Where, Who, What)
+```
+
+## Invited Lectures
+
+```{r}
+invited_lectures %>% detailed_entries(Title, When, Where, Who, What)
+```
+
+# University Service
+
+``` {r}
+university_service %>%
+  detailed_entries(What, When)
+
+```
+
+
+<!-- This is how to keep things on one page - first is ending block, second is starting block -->
+<!-- ```{=latex} -->
+<!-- \end{minipage} -->
+<!-- ``` -->
+
+<!-- ```{=latex} -->
+<!-- \begin{minipage}{\textwidth} -->
+<!-- ``` -->
+
+
+# Grants
+
+```{r}
+grants %>% detailed_entries(Position, When, PI, Title, Info)
+```
+
+# Professional Service
+
+## Professional Organizations
+
+```{r}
+orgs %>% detailed_entries(Position, When, PI, Title, Info)
+```
+
+## Ad-hoc Peer Review:
+
+```{r ad-hoc, results="markup"}
+pander::pander(adhoc, keep.line.breaks = T, style = 'grid', justify = 'left', caption=NULL)
+   
+```
+
+## Ad-hoc Grant Reviews
+
+* US / Israel Binational Agricultural Research and Development Fund 
+* Horserace Betting Levy Board Veterinary Advisory Committee (UK)
+
+## External Promotion Reviewer
+* Washington State University
+* University of California at Davis
