@@ -26,7 +26,10 @@ boards <- tribble(
 training <- tribble(~Year, ~Who, ~What,
         2016,
         "Institute for Healthcare Communication",
-        "Veterinary Communication Project Faculty Development Program"
+        "Veterinary Communication Project Faculty Development Program",
+        2022,
+        "United States Department of Agriculture",
+        "Equine Infectious Anemia (EIA) Testing Certification"
 )
 
 employment <- tribble(
