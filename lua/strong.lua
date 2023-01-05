@@ -1,6 +1,7 @@
-function Block(el)
-    if el.t == "Para" or el.t == "Plain" or el.t == "Pandoc" then
+function Span(el)
+    if el.t == "Span" then
         for k, _ in ipairs(el.content) do
+          print(el.content[k])
 
             if el.content[k].t == "Str" and el.content[k].text == "Dark," and
                 el.content[k + 1].t == "Space" and el.content[k + 2].t == "Str" and
